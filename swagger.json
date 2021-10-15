@@ -1,0 +1,379 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Gudang",
+    "version": "1.0.0"
+  },
+  "servers": [{
+    "url": "http://localhost:3000"
+  }],
+  "tags": [{
+    "name": "Role"
+  }, {
+    "name": "User"
+  }],
+  "paths": {
+    "/gudang/api/roles": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Tambah role",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "namaRole": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Menampilkan daftar role",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/gudang/api/roles/{id}": {
+      "put": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Update role",
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "id"
+        }],
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "namaRole": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Role"
+        ],
+        "summary": "Delete role",
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/gudang/api/users/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Registrasi user",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "foto": {
+                    "type": "string",
+                    "required": "true",
+                    "format": "binary"
+                  },
+                  "namaRole": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/gudang/api/users/verifikasi/{tokenVerifikasi}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Verifikasi pendaftaran",
+        "parameters": [{
+          "in": "path",
+          "name": "tokenVerifikasi",
+          "schema": {
+            "type": "string"
+          },
+          "description": "tokenVerifikasi"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/gudang/api/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Login user",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/gudang/api/users/lupa-password": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Lupa password user",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/gudang/api/users/ubah-password/{tokenReset}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Ubah password",
+        "parameters": [{
+          "in": "path",
+          "name": "tokenReset",
+          "schema": {
+            "type": "string"
+          },
+          "description": "tokenReset"
+        }],
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/gudang/api/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Menampilkan daftar user",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/gudang/api/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Menampilkan daftar user berdasarkan id",
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Error:Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Menghapus data user berdasarkan id",
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "MyUserToken": {
+        "name": "token",
+        "type": "apiKey",
+        "in": "header"
+      }
+    }
+  }
+}
